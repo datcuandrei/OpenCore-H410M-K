@@ -26,7 +26,7 @@ OpenCore `1.0.0` EFI for my Hackintosh.
 | **SSD2**|          ADATA SU650 120GB (For macOS)|
 | **Audio**|         Realtek ALC887/897|
 | **Ethernet**|      Realtek RTL8111H|
-| **Wifi**|          TP-Link Archer T2U|
+| **Wi-Fi**|          TP-Link Archer T2U|
 | **Bluetooth**|     N/A        |           
 
 
