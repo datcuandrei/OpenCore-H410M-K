@@ -4,7 +4,7 @@
 
 OpenCore `1.0.0` EFI for my Hackintosh.
 
-<b><p style="font-size: 150%;">Current latest version supported: <img src="https://cdn.jim-nielsen.com/macos/512/macos-sonoma-2023-09-26.png?rf=1024" width=2% height=2%/>Sonoma 14.4.1</p></b>
+<b><p style="font-size: 150%;">Current latest version supported: <img src="https://cdn.jim-nielsen.com/macos/512/macos-sonoma-2023-09-26.png?rf=1024" width=2% height=2%/>Sonoma 14.5</p></b>
 
 ![image](screenshot.png)
 > The serial number was blanked to avoid SN duplication.
@@ -75,13 +75,20 @@ OpenCore `1.0.0` EFI for my Hackintosh.
 ----------------------
 Personally, I have used [Dortania's guide](https://dortania.github.io/OpenCore-Install-Guide/installer-guide/mac-install.html#making-the-installer-in-macos) for downloading a macOS package, but you can also use [gibMacOS](https://github.com/corpnewt/gibMacOS) if you encounter any issues.
 
-**Note for Sonoma**: In case you are upgrading from Ventura to Sonoma and you are encountering boot loops when starting the macOS Installer, find your macOS Installer partition number in OpenCore EFI Shell and run:
+**Note for Sonoma**: In case you are upgrading from Ventura to Sonoma, first edit the following in `config.plist`:
+- Set `SecureBootModel` from `j185`(*which is the securebootmodel for `iMac20,1` SMBIOS*) to `Disabled`.
+- Set `RtWlanU` and `RtWlanU1827` kexts from `Enabled` to `Disabled` (if you use them)
+- Of course, `Toggle SIP (Disabled)`.
+
+If you are encountering boot loops when starting the macOS Installer, find your macOS Installer partition number in OpenCore EFI Shell and run:
 ```
 \System\Library\CoreServices\boot.efi -v revpatch=sbvmm
 ```
-On my system it worked without the patch. The `-v` is optional, but recommended for verbose outputting. It will make debugging easier.
+> `revpatch=sbvmm` activates `RestrictEvents` kext to apply patches strictly for Sonoma.
 
-Also, `SecureBootModel` is set to `Disabled` for Sonoma upgrade. If you want to enable it, use `j185` for `iMac20,1` SMBIOS.
+> The `-v` is optional, but recommended for verbose outputting. It will make debugging easier.
+
+On my system it worked without the patch.
 
 <b>What's working</b>
 ---------------------
